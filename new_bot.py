@@ -11,7 +11,7 @@ from handlers.user_private import user_private_router
 from common.bot_cmds_list import private
 
 
-ALLOWED_UPDATES = ['message', 'edited_message']  # фільтр оновлень які прийдуть нашому боту, обмеження типів Update
+#ALLOWED_UPDATES = ['message', 'edited_message']  # фільтр оновлень які прийдуть нашому боту, обмеження типів Update
 
 bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher()
@@ -25,7 +25,7 @@ async def main():
     print('бот запущено')
     await bot.delete_webhook(drop_pending_updates=True)  # видаляє надіслані в бот повідомлення за час коли бот не був запущений
     await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
-    await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
+    await dp.start_polling(bot)
 
 
 asyncio.run(main())

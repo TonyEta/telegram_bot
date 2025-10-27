@@ -1,4 +1,6 @@
-from aiogram import types, Router, F
+from aiogram import types, Router
+from aiogram import F
+from aiogram.types import Message
 from aiogram.filters import CommandStart, Command
 
 
@@ -27,6 +29,7 @@ async def shipping_cmd(message: types.Message):
     await message.answer("Варіанти доставки")
 
 
-@user_private_router.message(F.text)
-async def test_cmd(message: types.Message):
-    await message.answer("Це магічний фільтр")
+@user_private_router.message()
+async def shipping_cmd(message: types.Message):
+    await message.answer("авки")
+
