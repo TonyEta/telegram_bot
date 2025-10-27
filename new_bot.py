@@ -7,6 +7,7 @@ load_dotenv(find_dotenv())
 
 
 
+ALLOWED_UPDATES = ['message', 'edited_message']  # фільтр оновлень які прийдуть нашому боту, обмеження типів Update
 
 bot = Bot(token=os.getenv('TOKEN'))
 dp = Dispatcher()
@@ -18,13 +19,14 @@ async def start_cmd(message: types.Message):
 @dp.message()
 async def echo(message: types.Message):
     await message.answer(message.text)
-    await message.reply(message.text)
+
 
 
 
 async def main():
-    await bot.delete_webhook(drop_pending_updates=True)  #видаляє надіслані в бот повідомлення за час коли бот не був запущений
-    await dp.start_polling(bot)
+    print('бот запущено')
+    await bot.delete_webhook(drop_pending_updates=True)  # видаляє надіслані в бот повідомлення за час коли бот не був запущений
+    await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
 
 
 asyncio.run(main())
